@@ -3,7 +3,7 @@ import { ANSI_CODES } from '../constants/constants.js'
 import dir from '../directory/dir.js';
 
 
-class Commands {
+class CommandsHandler {
   constructor() {}
 
   help() {
@@ -33,11 +33,35 @@ class Commands {
     process.exit(0);
   }
 
-  _isEnoughArguments(args, requiredNumOfArgs) {
-    if (args.length !== requiredNumOfArgs) {
-      throw new Error('Invalid input');
+  async runCommand(inputLine) {
+    try {
+      const [ cmd, args ] = this._parseCommand(inputLine);
+      this._isValidCommand(cmd);
+      await this[cmd](...args);
+    } catch(e) {
+      this._errorHandler(e);
     }
-    return;
+  }
+
+  _parseCommand(line) {
+    const regEx = /([^\s]*'[^']+')|([^\s]*"[^"]+")|([^\s]+)/gm;
+    if (line) {
+      const [ command, ...args ] = (line.match(regEx) ?? []).map(arg => arg.replaceAll(/'|"/gu, ''));
+      return [ command.toLowerCase(), args ];
+    }
+    throw new Error('Invalid input');
+  }
+
+  _isValidCommand(cmd) {
+    if (cmd in this) {
+      return;
+    }
+    throw new Error('Invalid input');
+  }
+
+  _isEnoughArguments(args, requiredNumOfArgs) {
+    if (args.length === requiredNumOfArgs) return;
+    throw new Error('Invalid input');
   }
 
   _errorHandler(error) {
@@ -49,4 +73,4 @@ class Commands {
   }
 };
 
-export default new Commands();
+export default new CommandsHandler();
