@@ -28,7 +28,6 @@ class DirHandler {
     }
   }
 
-
   resolvePath(...p) {
     return path.resolve(...p);
   }

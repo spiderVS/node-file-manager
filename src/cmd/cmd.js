@@ -1,6 +1,7 @@
 import utils from "../utils/utils.js";
 import { GREEN_FG } from '../constants/constants.js'
 import dir from '../directory/dir.js';
+import { catFile } from "./commands/cat.js";
 
 
 class CommandsHandler {
@@ -28,8 +29,13 @@ class CommandsHandler {
     }
   }
 
-  async cat(pathToFile) {
-    
+  async cat(...pathToFile) {
+    try {
+      this._isEnoughArguments(pathToFile, 1);
+      await catFile(...pathToFile);
+    } catch(e) {
+      this._errorHandler(e);
+    }
   }
 
   pwd() {
