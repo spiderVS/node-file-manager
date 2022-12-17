@@ -1,5 +1,5 @@
 import utils from "../utils/utils.js";
-import { ANSI_CODES } from '../constants/constants.js'
+import { GREEN_FG } from '../constants/constants.js'
 import dir from '../directory/dir.js';
 
 
@@ -10,8 +10,13 @@ class CommandsHandler {
     utils.printToConsole('\nhelp:\ncopy <source> <destination>\npwd <path>');
   }
 
-  up() {
-    dir.up();
+  up(...args) {
+    try {
+      this._isEnoughArguments(args, 0);
+      dir.up();
+    } catch(e) {
+      this._errorHandler(e);
+    }
   }
 
   async cd(...pathToDir) {
@@ -23,12 +28,16 @@ class CommandsHandler {
     }
   }
 
-  pwd() {
-    utils.printToConsole(`\n🖿  ${process.cwd()}`, ANSI_CODES.fg.green);
+  async cat(pathToFile) {
+    
   }
 
-  ['.exit'](sigint = false) {
-    sigint && utils.printToConsole('');
+  pwd() {
+    utils.printToConsole(`\n🖿  ${process.cwd()}`, GREEN_FG);
+  }
+
+  ['.exit'](isSIGINT = false) {
+    isSIGINT && utils.printToConsole('');
     utils.goodbyePhrase();
     process.exit(0);
   }

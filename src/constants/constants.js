@@ -14,6 +14,7 @@ const ANSI_CODES = {
   reverse: "\x1b[7m",
   hidden: "\x1b[8m",
 
+  // Foreground color
   fg: {
       black: "\x1b[30m",
       red: "\x1b[31m",
@@ -25,6 +26,8 @@ const ANSI_CODES = {
       white: "\x1b[37m",
       crimson: "\x1b[38m" // Scarlet
   },
+
+  // Background color
   bg: {
       black: "\x1b[40m",
       red: "\x1b[41m",
@@ -38,4 +41,10 @@ const ANSI_CODES = {
   }
 };
 
-export { PROMPT_SYMBOL, DEFAULT_USERNAME, ANSI_CODES };
+// Selected colors
+const RED_FG = ANSI_CODES.fg.red;
+const GREEN_FG = ANSI_CODES.fg.green;
+const RESET_COLOR = ANSI_CODES.reset;
+
+
+export { PROMPT_SYMBOL, DEFAULT_USERNAME, RED_FG, GREEN_FG, RESET_COLOR };

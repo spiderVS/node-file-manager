@@ -24,10 +24,8 @@ const commandPromptInput = () => {
 
   rl.on('SIGINT', () => {
     rl.close();
-    commands['.exit'](true);
+    commandsHandler.runCommand('.exit true');
   });
-
-
 };
 
 export { commandPromptInput };

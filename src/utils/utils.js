@@ -1,4 +1,4 @@
-import { ANSI_CODES, DEFAULT_USERNAME } from '../constants/constants.js';
+import { DEFAULT_USERNAME, RED_FG, GREEN_FG, RESET_COLOR } from '../constants/constants.js';
 import { argv } from 'node:process';
 import dir from '../directory/dir.js';
 
@@ -26,14 +26,14 @@ class Utils {
   welcomePhrase() {
     this.printToConsole(
       `Welcome to the File Manager, ${this.userName}!`,
-      ANSI_CODES.fg.green
+      GREEN_FG
     );
   }
 
   goodbyePhrase() {
     this.printToConsole(
       `\nThank you for using File Manager, ${this.userName}, goodbye!`,
-      ANSI_CODES.fg.green
+      GREEN_FG
     );
   }
 
@@ -43,23 +43,33 @@ class Utils {
     );
   }
 
-  printToConsole(string, colorForeground = ANSI_CODES.fg.white, colorBackground = ANSI_CODES.bg.black) {
-    console.log(colorForeground, colorBackground, string, ANSI_CODES.reset);
+  _colorize(string = '', colorOptions) {
+    return `${colorOptions.join('')}${string}${RESET_COLOR}`;
+  }
+
+
+  printToConsole(string, ...colorOptions) {
+    console.log(
+      colorOptions.length
+        ? this._colorize(string, colorOptions)
+        : string
+    )
   }
 
   printError(e) {
     let errMsg = '';
     if (e === 'invalid_input') {
-      errMsg = `\nInvalid input.\nSee available commands and required arguments by \'help\'\n`;
+      errMsg = `\nInvalid input.\nSee available commands and required arguments by \'help\'`;
     } else if (e === 'operation_failed') {
       errMsg = `\nOperation failed`;
     }
 
     this.printToConsole(
       errMsg,
-      ANSI_CODES.fg.red
+      RED_FG
     );
   }
+
 }
 
 export default new Utils();
