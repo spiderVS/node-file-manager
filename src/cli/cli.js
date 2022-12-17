@@ -35,19 +35,11 @@ const commandPromptInput = () => {
 };
 
 const parseCommand = (line) => {
+  
+  const regEx = /([^\s]*'[^']+')|([^\s]*"[^"]+")|([^\s]+)/gm;
+  const [ command, ...args ] = line.match(regEx).map(arg => arg.replaceAll(/'|"/gu, ''));
 
-  // const [ command, ...args ] = line.trim().split(' ', 1);
-  const command = line.trim().split(' ', 1)[0].toLowerCase();
-
-  regEx = /\'|\"* /
-  const args = line
-    .trim()
-    .split(' ')
-    .filter()
-  return [ command, args ];
+  return [ command.toLowerCase(), args ];
 }
 
 export { commandPromptInput };
-
-// copy  'd:/Новая  папка'      'с:/'
-// copy 'd:/Новая  папка'   с:/
