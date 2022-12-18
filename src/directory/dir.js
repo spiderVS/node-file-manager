@@ -31,6 +31,14 @@ class DirHandler {
   resolvePath(...p) {
     return path.resolve(...p);
   }
+
+  dirnamePath(p) {
+    return path.dirname(this.resolvePath(p));
+  }
+
+  basenamePath(p) {
+    return path.basename(this.resolvePath(p));
+  }
 }
 
 export default new DirHandler();
