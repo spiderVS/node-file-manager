@@ -18,7 +18,7 @@ const osInfo = (arg) => {
     case 'homedir':
       utils.printToConsole(`\n${os.homedir()}`);
         break;
-      case 'username':
+    case 'username':
       utils.printToConsole(`\n${os.userInfo().username}`);
         break;
     case 'architecture':
@@ -26,7 +26,7 @@ const osInfo = (arg) => {
         break;
 
     default:
-      break;
+      throw new Error('Invalid input');
   }
 }
 

@@ -152,7 +152,7 @@ class CommandsHandler {
   }
 
   _isValidOsArgument(arg) {
-    if (arg.startsWith('--') && OS_INFO_ARGS.includes(arg.slice(2))) return;
+    if (arg.startsWith('--')) return;
     throw new Error('Invalid input');
   }
 
