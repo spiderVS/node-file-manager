@@ -2,7 +2,15 @@ import utils from "../utils/utils.js";
 import { GREEN_FG } from '../constants/constants.js'
 import dir from '../directory/dir.js';
 import { catFile } from "./commands/cat.js";
+import { addFile } from "./commands/add.js";
+import { rnFile } from "./commands/rn.js";
+import { cpFile } from "./commands/cp.js";
+import { mvFile } from "./commands/mv.js";
+import { rmFile } from "./commands/rm.js";
+import { osInfo } from "./commands/os.js";
+import { calculateHash } from "./commands/hash.js";
 
+const OS_INFO_ARGS = ['EOL', 'cpus', 'homedir', 'username', 'architecture']
 
 class CommandsHandler {
   constructor() {}
@@ -33,6 +41,70 @@ class CommandsHandler {
     try {
       this._isEnoughArguments(pathToFile, 1);
       await catFile(...pathToFile);
+    } catch(e) {
+      this._errorHandler(e);
+    }
+  }
+
+  async add(...fileName) {
+    try {
+      this._isEnoughArguments(fileName, 1);
+      await addFile(...fileName);
+    } catch(e) {
+      this._errorHandler(e);
+    }
+  }
+
+  async rn(...args) {
+    try {
+      this._isEnoughArguments(args, 2);
+      await rnFile(...args);
+    } catch(e) {
+      this._errorHandler(e);
+    }
+  }
+
+  async cp(...args) {
+    try {
+      this._isEnoughArguments(args, 2);
+      await cpFile(...args);
+    } catch(e) {
+      this._errorHandler(e);
+    }
+  }
+
+  async mv(...args) {
+    try {
+      this._isEnoughArguments(args, 2);
+      await mvFile(...args);
+    } catch(e) {
+      this._errorHandler(e);
+    }
+  }
+
+  async rm(...args) {
+    try {
+      this._isEnoughArguments(args, 1);
+      await rmFile(...args);
+    } catch(e) {
+      this._errorHandler(e);
+    }
+  }
+
+  async hash(...args) {
+    try {
+      this._isEnoughArguments(args, 1);
+      await calculateHash(...args);
+    } catch(e) {
+      this._errorHandler(e);
+    }
+  }
+
+  async os(...args) {
+    try {
+      this._isEnoughArguments(args, 1);
+      this._isValidOsArgument(...args);
+      await osInfo(args[0].slice(2));
     } catch(e) {
       this._errorHandler(e);
     }
@@ -76,6 +148,11 @@ class CommandsHandler {
 
   _isEnoughArguments(args, requiredNumOfArgs) {
     if (args.length === requiredNumOfArgs) return;
+    throw new Error('Invalid input');
+  }
+
+  _isValidOsArgument(arg) {
+    if (arg.startsWith('--') && OS_INFO_ARGS.includes(arg.slice(2))) return;
     throw new Error('Invalid input');
   }
 
