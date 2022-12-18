@@ -9,6 +9,7 @@ import { mvFile } from "./commands/mv.js";
 import { rmFile } from "./commands/rm.js";
 import { osInfo } from "./commands/os.js";
 import { calculateHash } from "./commands/hash.js";
+import { lsDir } from "./commands/ls.js";
 
 const OS_INFO_ARGS = ['EOL', 'cpus', 'homedir', 'username', 'architecture']
 
@@ -32,6 +33,16 @@ class CommandsHandler {
     try {
       this._isEnoughArguments(pathToDir, 1);
       await dir.cd(...pathToDir);
+    } catch(e) {
+      this._errorHandler(e);
+    }
+  }
+
+  async ls(...args) {
+    try {
+      const pathToCurrentDir = dir.resolvePath(dir.getCurrentDir());
+      this._isEnoughArguments(args, 0);
+      await lsDir(pathToCurrentDir);
     } catch(e) {
       this._errorHandler(e);
     }
@@ -108,10 +119,6 @@ class CommandsHandler {
     } catch(e) {
       this._errorHandler(e);
     }
-  }
-
-  pwd() {
-    utils.printToConsole(`\n🖿  ${process.cwd()}`, GREEN_FG);
   }
 
   ['.exit'](isSIGINT = false) {

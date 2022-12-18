@@ -1,9 +1,13 @@
 const DEFAULT_USERNAME = 'User';
 
-// const PROMPT_SYMBOL = '➜ ';
-// const PROMPT_SYMBOL = '⮩ ';
-// const PROMPT_SYMBOL = '⮡ ';
-const PROMPT_SYMBOL = '⮕ ';
+/* Only for terminal with unicode support (bash, zsh, fish, Windows Terminal, etc.)
+  const PROMPT_SYMBOL = '➜ ';
+  const PROMPT_SYMBOL = '⮩ ';
+  const PROMPT_SYMBOL = '⮡ ';
+  const PROMPT_SYMBOL = '⮕ ';
+*/
+
+const PROMPT_SYMBOL = '> ';
 
 const ANSI_CODES = {
   reset: "\x1b[0m",

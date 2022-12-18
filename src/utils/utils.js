@@ -39,7 +39,11 @@ class Utils {
 
   currentDirPhrase() {
     this.printToConsole(
-      `\nYou are currently in 🖴 ${this.currentDir}`
+      `\nYou are currently in ${this.currentDir}`
+
+      /*
+        `\nYou are currently in 🖴 ${this.currentDir}` - only for terminal with unicode support (bash, zsh, fish, Windows Terminal, etc.)
+      */
     );
   }
 
@@ -54,6 +58,11 @@ class Utils {
         ? this._colorize(string, colorOptions)
         : string
     )
+  }
+
+  printTable(array) {
+    console.log();
+    console.table(array);
   }
 
   printError(e) {
