@@ -10,6 +10,7 @@ import { rmFile } from "./commands/rm.js";
 import { osInfo } from "./commands/os.js";
 import { calculateHash } from "./commands/hash.js";
 import { lsDir } from "./commands/ls.js";
+import { compressFile } from "./commands/compress.js";
 
 const OS_INFO_ARGS = ['EOL', 'cpus', 'homedir', 'username', 'architecture']
 
@@ -116,6 +117,24 @@ class CommandsHandler {
       this._isEnoughArguments(args, 1);
       this._isValidOsArgument(...args);
       await osInfo(args[0].slice(2));
+    } catch(e) {
+      this._errorHandler(e);
+    }
+  }
+
+  async compress(...args) {
+    try {
+      this._isEnoughArguments(args, 2);
+      await compressFile(...args);
+    } catch(e) {
+      this._errorHandler(e);
+    }
+  }
+
+  async decompress(...args) {
+    try {
+      this._isEnoughArguments(args, 2);
+      await compressFile(...args, false);
     } catch(e) {
       this._errorHandler(e);
     }
