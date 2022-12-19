@@ -1,6 +1,3 @@
-import utils from "./utils/utils.js";
-import { commandPromptInput } from "./cli/cli.js";
+import cmd from './cmd/cmd.js'
 
-utils.welcomePhrase();
-
-commandPromptInput();
+cmd._start();
