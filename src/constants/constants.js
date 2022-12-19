@@ -54,10 +54,12 @@ hash
 compress
   Usage: compress [PATH_TO_FILE] [PATH_TO_DESTINATION_FILE]
   Action: Compress file (using Brotli algorithm)
+  <Example>: 'compress 1.txt 1.txt.br'
 
 decompress
   Usage: decompress [PATH_TO_FILE] [PATH_TO_DESTINATION_FILE]
-  Action: Decompress file (using Brotli algorithm)`
+  Action: Decompress file (using Brotli algorithm)
+  <Example>: 'decompress 1.txt.br 1.txt'`
 
 /* Only for terminal with unicode support (bash, zsh, fish, Windows Terminal, etc.)
   const PROMPT_SYMBOL = '➜ ';
