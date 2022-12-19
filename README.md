@@ -146,7 +146,11 @@ os [OPTION]
 **Usage:**
 
 ```bash
-  compress [PATH_TO_FILE] [PATH_TO_DESTINATION_FILE]
+  compress [PATH_TO_FILE] [PATH_TO_DESTINATION_FILE]   
+```
+***Example usage:***
+```
+compress 1.txt 1.txt.br
 ```
 
 **Action:** Compress file (using Brotli algorithm)
@@ -157,6 +161,10 @@ os [OPTION]
 
 ```bash
   decompress [PATH_TO_FILE] [PATH_TO_DESTINATION_FILE]
+```
+***Example usage:***
+```
+decompress 1.txt.br 1.txt
 ```
 
 **Action:** Decompress file (using Brotli algorithm)
