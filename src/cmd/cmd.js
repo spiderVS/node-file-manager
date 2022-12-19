@@ -1,5 +1,5 @@
 import utils from "../utils/utils.js";
-import { GREEN_FG } from '../constants/constants.js'
+import { commandPromptInput } from "../cli/cli.js";
 import dir from '../directory/dir.js';
 import { catFile } from "./commands/cat.js";
 import { addFile } from "./commands/add.js";
@@ -11,8 +11,6 @@ import { osInfo } from "./commands/os.js";
 import { calculateHash } from "./commands/hash.js";
 import { lsDir } from "./commands/ls.js";
 import { compressFile } from "./commands/compress.js";
-
-const OS_INFO_ARGS = ['EOL', 'cpus', 'homedir', 'username', 'architecture']
 
 class CommandsHandler {
   constructor() {}
@@ -187,7 +185,16 @@ class CommandsHandler {
       utils.printError('operation_failed');
     } else if (error.message === 'Invalid input') {
       utils.printError('invalid_input');
+    } else if (error.message === 'File already exists') {
+      utils.printError('file_exists');
+    } else if (error.message === 'No such file or directory') {
+       utils.printError('no_file_exists');
     }
+  }
+
+  _start() {
+    utils.welcomePhrase();
+    commandPromptInput();
   }
 };
 

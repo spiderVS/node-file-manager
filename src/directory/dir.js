@@ -1,6 +1,7 @@
 import { homedir } from "node:os";
 import path from "node:path";
 import { chdir, cwd } from 'node:process';
+import { _checkError } from "../cmd/commands/_checkError.js";
 
 class DirHandler {
   constructor() {
@@ -24,7 +25,7 @@ class DirHandler {
       // add support for Linux home directory
       p === '~' ? this.setCurrentDir(homedir()) : this.setCurrentDir(this.resolvePath(p));
     } catch (e) {
-      throw new Error('Operation failed');
+      _checkError(e);
     }
   }
 

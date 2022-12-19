@@ -39,7 +39,7 @@ class Utils {
 
   currentDirPhrase() {
     this.printToConsole(
-      `\nYou are currently in ${this._colorize(this.currentDir, [MAGENTA_FG])}`
+      `\nYou are currently in ${this.colorize(this.currentDir, [MAGENTA_FG])}`
 
       /*
         `\nYou are currently in 🖴 ${this.currentDir}` - only for terminal with unicode support (bash, zsh, fish, Windows Terminal, etc.)
@@ -47,7 +47,7 @@ class Utils {
     );
   }
 
-  _colorize(string = '', colorOptions) {
+  colorize(string = '', colorOptions) {
     return `${colorOptions.join('')}${string}${RESET_COLOR}`;
   }
 
@@ -55,7 +55,7 @@ class Utils {
   printToConsole(string, ...colorOptions) {
     console.log(
       colorOptions.length
-        ? this._colorize(string, colorOptions)
+        ? this.colorize(string, colorOptions)
         : string
     )
   }
@@ -71,6 +71,10 @@ class Utils {
       errMsg = `\nInvalid input.\nSee available commands and required arguments by \'help\'`;
     } else if (e === 'operation_failed') {
       errMsg = `\nOperation failed`;
+    } else if (e === 'file_exists') {
+      errMsg = `\nOperation failed.\nFile already exists`;
+    } else if (e === 'no_file_exists') {
+      errMsg = `\nOperation failed.\nNo such file or directory`;
     }
 
     this.printToConsole(

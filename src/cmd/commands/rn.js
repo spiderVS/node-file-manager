@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import dir from '../../directory/dir.js';
 import { rmFile } from './rm.js';
+import { _checkError } from './_checkError.js';
 
 const rnFile = async (pathToFile, newFileName) => {
   try {
@@ -14,7 +15,7 @@ const rnFile = async (pathToFile, newFileName) => {
     );
     await rmFile(pathToFile);
   } catch (e) {
-    throw new Error('Operation failed');
+    _checkError(e);
   }
 };
 

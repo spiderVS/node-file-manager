@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import dir from '../../directory/dir.js';
 import { pipeline } from 'node:stream/promises';
+import { _checkError } from './_checkError.js';
 
 const cpFile = async (pathToFile, pathToDirectory) => {
   try {
@@ -19,7 +20,7 @@ const cpFile = async (pathToFile, pathToDirectory) => {
       fileDestination
     )
   } catch (err) {
-    throw new Error('Operation failed');
+    _checkError(e);
   }
 };
 

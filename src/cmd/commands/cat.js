@@ -1,6 +1,7 @@
 import { open } from 'node:fs/promises';
 import { stdout } from 'node:process';
 import dir from '../../directory/dir.js';
+import { _checkError } from './_checkError.js';
 
 const catFile = async (pathToFile) => {
   try {
@@ -12,8 +13,8 @@ const catFile = async (pathToFile) => {
     }
     await filehandle.close();
 
-  } catch (err) {
-    throw new Error('Operation failed');
+  } catch (e) {
+    _checkError(e);
   }
 };
 

@@ -3,6 +3,7 @@ import { createWriteStream } from 'node:fs';
 import zlib from 'node:zlib';
 import { pipeline } from 'node:stream/promises';
 import dir from '../../directory/dir.js';
+import { _checkError } from './_checkError.js';
 
 
 const createStreams = async (pathToFile, pathToDestFile, isCompress = true) => {
@@ -40,7 +41,7 @@ const compressFile = async (pathToFile, pathToDestFile, isCompress = true) => {
       fileDestination
     )
   } catch (e) {
-    throw new Error('Operation failed');
+    _checkError(e);
   }
 };
 

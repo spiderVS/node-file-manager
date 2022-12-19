@@ -1,5 +1,6 @@
 import { stat, readdir } from 'node:fs/promises';
 import utils from '../../utils/utils.js'
+import { _checkError } from './_checkError.js';
 
 const lsDir = async (pathToDir) => {
   try {
@@ -22,7 +23,7 @@ const lsDir = async (pathToDir) => {
 
     utils.printTable(dirContentSorted);
   } catch (e) {
-    throw new Error('Operation failed');
+    _checkError(e);
   }
 }
 
@@ -51,7 +52,7 @@ const lsDir = async (pathToDir) => {
     dirContentSorted.forEach(el => utils.printToConsole(`${el.type} ${el.ico} ${el.name}`))
 
   } catch (e) {
-    throw new Error('Operation failed');
+    _checkError(e);
   }
 }
 */
