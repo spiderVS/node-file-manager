@@ -1,4 +1,4 @@
-import { DEFAULT_USERNAME, RED_FG, GREEN_FG, RESET_COLOR } from '../constants/constants.js';
+import { DEFAULT_USERNAME, RED_FG, GREEN_FG, RESET_COLOR, MAGENTA_FG } from '../constants/constants.js';
 import { argv } from 'node:process';
 import dir from '../directory/dir.js';
 
@@ -39,7 +39,7 @@ class Utils {
 
   currentDirPhrase() {
     this.printToConsole(
-      `\nYou are currently in ${this.currentDir}`
+      `\nYou are currently in ${this._colorize(this.currentDir, [MAGENTA_FG])}`
 
       /*
         `\nYou are currently in 🖴 ${this.currentDir}` - only for terminal with unicode support (bash, zsh, fish, Windows Terminal, etc.)

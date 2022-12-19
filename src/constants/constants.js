@@ -48,7 +48,8 @@ const ANSI_CODES = {
 // Selected colors
 const RED_FG = ANSI_CODES.fg.red;
 const GREEN_FG = ANSI_CODES.fg.green;
+const MAGENTA_FG = ANSI_CODES.fg.magenta;
 const RESET_COLOR = ANSI_CODES.reset;
 
 
-export { PROMPT_SYMBOL, DEFAULT_USERNAME, RED_FG, GREEN_FG, RESET_COLOR };
+export { PROMPT_SYMBOL, DEFAULT_USERNAME, RED_FG, GREEN_FG, MAGENTA_FG, RESET_COLOR };
