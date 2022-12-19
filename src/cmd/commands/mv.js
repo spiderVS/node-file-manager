@@ -6,7 +6,7 @@ const mvFile = async (pathToFile, pathToDirectory) => {
   try {
     await cpFile(pathToFile, pathToDirectory);
     await rmFile(pathToFile);
-  } catch (err) {
+  } catch (e) {
     _checkError(e);
   }
 };

@@ -19,7 +19,7 @@ const cpFile = async (pathToFile, pathToDirectory) => {
       fileOrigin,
       fileDestination
     )
-  } catch (err) {
+  } catch (e) {
     _checkError(e);
   }
 };
