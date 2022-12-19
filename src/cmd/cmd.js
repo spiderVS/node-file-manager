@@ -11,12 +11,13 @@ import { osInfo } from "./commands/os.js";
 import { calculateHash } from "./commands/hash.js";
 import { lsDir } from "./commands/ls.js";
 import { compressFile } from "./commands/compress.js";
+import { HELP } from "../constants/constants.js";
 
 class CommandsHandler {
   constructor() {}
 
   help() {
-    utils.printToConsole('\nhelp:\ncopy <source> <destination>\npwd <path>');
+    utils.printToConsole(HELP);
   }
 
   up(...args) {
